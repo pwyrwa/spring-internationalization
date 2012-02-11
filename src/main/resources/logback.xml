@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <contextName>spring-embedded-db-webapp</contextName>
+
+    <!-- Enable JMX configuration -->
+    <jmxConfigurator/>
+
+    <property name="applicationName" value="spring-embedded-db-webapp"/>
+
+
+    <property name="logLevel" type="java.lang.String"/>
+    <property name="thirdPartyLevel" value="INFO"/>
+    <property name="logBaseDir" value="target/logs"/>
+
+    <!-- Get logging levels from JNDI. There is a default for this in case none is defined. -->
+    <insertFromJNDI env-entry-name="java:comp/env/param/logging/level" as="logLevel"/>
+    <insertFromJNDI env-entry-name="java:comp/env/param/logging/thirdPartyLevel" as="thirdPartyLogLevel"/>
+    <insertFromJNDI env-entry-name="java:comp/env/param/logging/baseDir" as="logBaseDir"/>
+
+    <!-- Defines the format for log entries. -->
+    <property name="logEntryFormat" value="%-12date{HH:mm:ss.SSS}  %-5level  %-40logger{40} -> %msg%n"/>
+    <property name="logBase" value="${logBaseDir}/${applicationName}"/>
+
+    <!-- org.pio.* log file -->
+    <property name="logFileBase" value="${logBase}/application"/>
+    <appender name="applicationAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logFileBase}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Log will rollover nightly (at midnight) -->
+            <fileNamePattern>${logFileBase}.%d.log.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logEntryFormat}</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.pio" level="${logLevel:-info}" additivity="false">
+        <appender-ref ref="applicationAppender"/>
+    </logger>
+
+    <!-- Spring log file -->
+    <property name="springLogFileBase" value="${logBase}/spring"/>
+    <appender name="springAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${springLogFileBase}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Log will rollover nightly (at midnight) -->
+            <fileNamePattern>${springLogFileBase}.%d.log.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logEntryFormat}</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.springframework" level="${thirdPartyLogLevel:-info}" additivity="false">
+        <appender-ref ref="springAppender"/>
+    </logger>
+
+    <!-- Separate log file for non-Spring third-party log messages -->
+    <property name="thirdPartyLogFileBase" value="${logBase}/third-party"/>
+    <appender name="thirdParty" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${thirdPartyLogFileBase}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Log will rollover nightly (at midnight) -->
+            <fileNamePattern>${thirdPartyLogFileBase}.%d.log.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logEntryFormat}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${logEntryFormat}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Available Appenders -->
+    <!-- applicationAppender - Intended for Application logs -->
+    <!-- springAppender - Intended for Spring related logs -->
+    <!-- STDOUT - Standard Output (use ONLY for tests) -->
+    <!-- thirdParty - Intended as a catch-all -->
+    <logger name="org.pio" level="DEBUG" additivity="false">
+        <appender-ref ref="applicationAppender"/>
+    </logger>
+
+    <!-- default all the rest to ThirdParty -->
+    <root level="WARN">
+        <appender-ref ref="thirdParty"/>
+    </root>
+
+</configuration>
