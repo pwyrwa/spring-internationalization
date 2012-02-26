@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    <contextName>spring-embedded-db-webapp</contextName>
+    <contextName>spring-internationalization</contextName>
 
     <!-- Enable JMX configuration -->
     <jmxConfigurator/>
@@ -34,7 +34,7 @@
         </encoder>
     </appender>
     <logger name="org.pio" level="${logLevel:-info}" additivity="false">
-        <appender-ref ref="applicationAppender"/>
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- Spring log file -->
@@ -50,7 +50,7 @@
         </encoder>
     </appender>
     <logger name="org.springframework" level="${thirdPartyLogLevel:-info}" additivity="false">
-        <appender-ref ref="springAppender"/>
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- Separate log file for non-Spring third-party log messages -->
@@ -78,12 +78,12 @@
     <!-- STDOUT - Standard Output (use ONLY for tests) -->
     <!-- thirdParty - Intended as a catch-all -->
     <logger name="org.pio" level="DEBUG" additivity="false">
-        <appender-ref ref="applicationAppender"/>
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- default all the rest to ThirdParty -->
     <root level="WARN">
-        <appender-ref ref="thirdParty"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>
