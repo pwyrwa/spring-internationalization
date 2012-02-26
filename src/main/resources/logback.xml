@@ -5,7 +5,7 @@
     <!-- Enable JMX configuration -->
     <jmxConfigurator/>
 
-    <property name="applicationName" value="spring-embedded-db-webapp"/>
+    <property name="applicationName" value="spring-internationalization"/>
 
 
     <property name="logLevel" type="java.lang.String"/>
