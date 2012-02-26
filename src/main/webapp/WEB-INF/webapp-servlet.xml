@@ -8,10 +8,6 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="org.pio.sampleintern">
-        <!-- Controllers are ignored in lew of <mvc> configuration -->
-        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
-    </context:component-scan>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:viewClass="org.springframework.web.servlet.view.JstlView"
