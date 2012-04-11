@@ -73,6 +73,10 @@
         <url-pattern>*.png</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.less</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <!-- Matches servlet above -->
         <servlet-name>webapp</servlet-name>
         <url-pattern>/</url-pattern>

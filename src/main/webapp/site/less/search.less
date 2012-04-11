@@ -1,0 +1,102 @@
+
+@checkboxLabelOffset : 10px;
+
+/* Set label defaults to inline-bold */
+.labelDefaults {
+    display: inline;
+    font-weight: bold;
+}
+
+/* offset a right-hand label and use normal-weight font */
+.checkboxLabelAndOption {
+    div label {
+        font-weight: normal;
+    }
+    div input {
+         margin-right: @checkboxLabelOffset;
+    }
+}
+
+#search-widget {
+    border: 1px solid #080808;
+    margin: 20px 0;
+    padding: 20px;
+    label {
+       .labelDefaults;
+    }
+}
+
+#search-options {
+    width: 100%;
+}
+
+#search-limit {
+    margin-left: 10px;
+    #limit-to {
+        margin-left: 0px;
+        label {
+           margin-left: 0px;
+        }
+    }
+}
+
+#optionsSelection {
+    margin-left: 10px;
+    text-align: right;
+    #optionsMessage {
+        color:red;
+        display: none;
+    }
+    #optionsTrigger {
+        margin-left: 10px;
+    }
+}
+
+#search-query {
+   margin-left: 10px;
+}
+
+#searchString {
+    width: 80%;
+}
+
+#lib-and-options {
+    width: 80%;
+    display: block;
+    text-align: right;
+    padding-top: 10px;
+}
+
+#searchBox {
+    margin-left: 0px;
+    width: 100%
+}
+
+div.searchButtons {
+    margin-left: 20px;
+}
+
+#search-fields label {
+    padding-left: 10px;
+}
+
+
+#format-list {
+    width: 20em;
+    height: 11em;
+    overflow-y: scroll;
+    padding-bottom: 4px;
+}
+
+#search-format {
+    .checkboxLabelAndOption;
+}
+
+#search-recordType {
+    .checkboxLabelAndOption;
+}
+
+.link{
+    text-decoration: underline;
+    color: blue;
+}

@@ -21,14 +21,36 @@
         <cargo.tomcat.installdir>${project.build.directory}/cargo/installs</cargo.tomcat.installdir>
         <project.context.path>/spring-internationalization</project.context.path>
         <plugin.cargo.version>1.1.4</plugin.cargo.version>
+        <plugin.jrebel.version>1.1.3</plugin.jrebel.version>
         <logback.version>0.9.30</logback.version>
         <slf4j.version>1.6.3</slf4j.version>
         <sitemesh.version>2.4.2</sitemesh.version>
+
+        <mybatis.version>3.1.0</mybatis.version>
+        <mybatis-spring.version>1.1.0</mybatis-spring.version>
+        <guava.version>11.0.2</guava.version>
+        <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+        <jackson.version>1.9.5</jackson.version>
+        <joda-time.version>2.1</joda-time.version>
+
 
     </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.cloudfoundry</groupId>
+                <artifactId>cf-maven-plugin</artifactId>
+                <version>1.0.0.M1</version>
+                <configuration>
+                    <server>cf-remote</server>
+                    <target>http://api.cloudfoundry.com</target>
+                    <url>pio-intern.cloudfoundry.com/home</url>
+                    <appname>pio-intern</appname>
+                    <memory>512</memory>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -155,7 +177,91 @@
             <artifactId>sitemesh</artifactId>
             <version>${sitemesh.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <!-- END Container Provided Libraries -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-tx</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-jdbc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Embedded db support for testing-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+
+
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>jrebel</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.zeroturnaround</groupId>
+                        <artifactId>jrebel-maven-plugin</artifactId>
+                        <version>${plugin.jrebel.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-rebel-xml</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

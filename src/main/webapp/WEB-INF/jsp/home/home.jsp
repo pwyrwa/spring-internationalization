@@ -6,7 +6,7 @@
         <script type="text/javascript" src="<c:url value="/site/js/jquery.cookies.2.2.0.js" /> "></script>
     </head>
     <body>
-        <h3><spring:message code="home.page.title"/></h3>
+        <%--<h3><spring:message code="home.page.title"/></h3>--%>
 
 
         <br> <spring:message code="home.page.language.lbl"/> &nbsp;

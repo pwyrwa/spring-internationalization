@@ -1,0 +1,177 @@
+@import "bootstrap/bootstrap.less";
+
+html, body {
+    height: 100%;
+}
+
+@import "bootstrap/responsive.less";
+@import "search.less";
+
+
+/* ===== Primary Styles ========================================================
+   Contributors:  Colin May (Dynacron Group, winter-spring/2012),
+
+   ========================================================================== */
+@nice-blue: #00bfff; /* DeepSkyBlue */
+@footerheight: 30px;
+@footerTopPadding: 5px;
+@footerTopBorderwidth: 1px;
+@footerBottomBorderwidth: 0;
+
+
+/* ================== basic layout blocks ================== */
+/*
+#wrapper {
+    min-height: 100%;
+    margin-top: -(@footerheight + 2*@footerTopPadding + @footerTopBorderwidth + @footerBottomBorderwidth);
+}
+*/
+
+#content-body {
+    padding-bottom: (@footerheight + 2*@footerTopPadding + @footerTopBorderwidth + @footerBottomBorderwidth + 10);
+.clearfix();
+max-width: 1400px;
+margin: 0 auto;
+    }
+@media (min-width: 980px) {
+    #content-body {
+        padding-top: 5em;
+    }
+}
+html.lt-ie9 #content-body { padding-top: 5em; }
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    border-top: @footerTopBorderwidth solid @nice-blue;
+    border-bottom: @footerBottomBorderwidth groove @nice-blue;
+    padding: @footerTopPadding 3px;
+    min-height: @footerheight;
+    background-color: black;
+    color: white;
+img {
+    vertical-align: middle;
+}
+    }
+
+
+/* ================== utility styles ================== */
+
+.span-HspacedL {margin-left: 5px;}
+.span-HspacedR {margin-right: 5px;}
+.widget-Vspaced {margin-bottom: 1em;}
+.whiteSmokeBG { background-color: whiteSmoke; }
+.pad10  { padding: 10px; }
+.alignR { text-align: right; }
+h1, .h1 { font-size: 30px; }
+h2, .h2 { font-size: 24px; }
+h3, .h3 { font-size: 18px; }
+h4, .h4 { font-size: 14px; }
+h5, .h5 { font-size: 12px; }
+h6, .h6 { font-size: 11px; }
+.h1, .h2, .h3, .h4, .h5, .h6 { font-weight: bold; }
+
+.element-invisible {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+button[class^="icon-"] > i,
+button[class*=" icon-"] > i,
+*[class^="icon-"] > i,
+*[class*=" icon-"] > i {
+.element-invisible;
+    }
+button.linkish {
+    border: none;
+    background: none;
+    padding: 0;
+    color: @linkColor;
+&:hover { text-decoration: underline; }
+    }
+
+/* ================== common elements ================== */
+
+.navbar .nav {
+    padding-left: 2em;
+}
+.navbar .nav > li > a.active,
+.navbar .nav > li > a:hover {
+    color: @nice-blue;
+}
+.navbar .nav > li > a {
+    color: white;
+}
+.navbar .brand {
+    color: inherit;
+    padding: 0 20px 15px 35px;
+    background: transparent url(../img/IntotaLogo.png) 0 0 no-repeat;
+}
+#party-block {
+    float: right;
+    padding-left: 20px;
+    margin-top: 10px;
+
+.party-name {
+    color: @navbarText;
+}
+img {
+    vertical-align: middle;
+    width: 25px;
+    height: 22px;
+.span-HspacedR;
+    }
+    }
+html.lt-ie9 {
+.navbar #party-block { white-space: nowrap; padding-right: 2em;}
+    }
+@media (max-width: 480px){
+    #party-block {
+        float: none;
+        padding-left: 0;
+        margin-bottom: 0.5em;
+    }
+    .navbar .nav {
+        padding-left: 0;
+    }
+}
+.modal {
+    padding: 0;
+.modal-main-content { .pad10; }
+.modal-footer {
+    text-align: right;
+.btn { float: none; }
+    }
+    }
+
+
+/* Styles for demo templates only.  Don't apply these classes to 'real' stuff! */
+
+.demoblock {
+    background-color: whiteSmoke;
+    color: grey;
+    border-bottom: 1px dotted grey;
+}
+.demoTall {
+    min-height: 500px;
+.demoblock;
+.pad10;
+    }
+.demoShort {
+    min-height: 200px;
+.demoblock;
+.pad10;
+    }
+body.activePage-upload #content-body {
+    border: 1px outset lightgray;
+    border-radius: 8px;
+    padding-top: 2em;
+    margin-top: 5em;
+}
+html.lt-ie8 body.activePage-upload #content-body {
+    padding-top: 6em;
+}
